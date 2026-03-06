@@ -1,0 +1,41 @@
+export const tokens = {
+	layout: {
+		tableRadius: 10,
+		headerHeight: 72,
+		headerPaddingX: { xs: 2, sm: 4 },
+		mainPaddingY: { xs: 2, md: 4 },
+		minViewportWidth: 320,
+	},
+	animation: { hover: '0.2s ease' },
+	table: {
+		minWidth: 720,
+		columnWidths: { id: '10%', name: '30%', category: '19%', price: '16%', stock: '10%', status: '15%' } as const,
+		emptyStatePadding: 6,
+		skeletonRows: 10,
+		skeletonWidths: [30, 180, 120, 90, 50, 80] as const,
+		containerOverflowX: 'auto' as const,
+	},
+	drawer: {
+		width: { xs: '90%', sm: 420 },
+		paperPadding: 4,
+		headerMarginBottom: 3,
+		loaderMarginTop: 4,
+		loaderSize: 24,
+		detailSpacing: 2,
+		detailLabelSpacing: 0.5,
+	},
+	pagination: {
+		defaultPage: 1,
+		defaultSize: 10,
+		rowsPerPageOptions: [10, 20, 50] as const,
+		containerMarginTop: 2,
+		actionsMarginLeft: { xs: 0, md: 2 },
+	},
+	search: { feedbackSpinnerSize: 24, feedbackBoxHeight: 24 },
+	hero: {
+		overlineFontSize: { xs: 10, sm: 12 },
+		titleFontSize: { xs: 24, sm: 46 },
+		subtitleFontSize: { xs: 10, sm: 12 },
+		subtitleMaxWidth: 520,
+	},
+}
