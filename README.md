@@ -10,6 +10,7 @@ Aplicação de listagem de produtos com busca, paginação e drawer de detalhes.
 - **React Router DOM**
 - **React Query**
 - **Material UI**
+- **Cypress**
 
 ## Instalação e execução
 
@@ -90,7 +91,7 @@ npm run preview
 
 ### 5. Dados mockados
 
-- Arquivo `mocks/productsMock.ts` com **50+ produtos**:
+- Arquivo `mocks/productsMock.ts` com **50 produtos**:
    - Variação de categoria, preço, estoque, status e datas.
 
 - Função `fetchProducts` em `mocks/products.ts`:
