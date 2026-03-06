@@ -12,6 +12,7 @@ export const ProductDrawer = () => {
 			anchor="right"
 			open={isOpen}
 			onClose={handleClose}
+			data-cy="product-drawer"
 			sx={{ '& .MuiDrawer-paper': { width: tokens.drawer.width, p: tokens.drawer.paperPadding } }}
 		>
 			<ProductDrawerHeader onClose={handleClose} />

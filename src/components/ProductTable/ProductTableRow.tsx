@@ -29,6 +29,7 @@ export const ProductTableRow = ({ product }: ProductTableRowProps) => {
 		<TableRow
 			hover={isClickable}
 			onClick={handleClick}
+			data-cy="product-row"
 			sx={{
 				cursor: isClickable ? 'pointer' : 'default',
 				opacity: isClickable ? 1 : 0.5,
@@ -72,6 +73,7 @@ export const ProductTableRow = ({ product }: ProductTableRowProps) => {
 						variant={product.status === 'Ativo' ? 'filled' : 'outlined'}
 						size="small"
 						sx={{ fontSize: 11 }}
+						data-cy="product-status-chip"
 					/>
 				</Box>
 			</TableCell>

@@ -33,7 +33,7 @@ export const productsMock: Product[] = [
 	},
 	{
 		id: 4,
-		name: 'Monitor LG 27\" 4K',
+		name: 'Monitor LG 27" 4K',
 		description: 'Monitor LG UltraHD 27 polegadas com resolução 4K',
 		category: 'Eletrônicos',
 		price: 1899.99,
@@ -143,7 +143,7 @@ export const productsMock: Product[] = [
 	},
 	{
 		id: 15,
-		name: 'Monitor AOC 24\" 144Hz',
+		name: 'Monitor AOC 24" 144Hz',
 		description: 'Monitor AOC 24 polegadas Full HD com 144Hz para jogos e produtividade',
 		category: 'Eletrônicos',
 		price: 999.9,
@@ -273,7 +273,7 @@ export const productsMock: Product[] = [
 	},
 	{
 		id: 28,
-		name: 'Monitor Dell 24\" IPS',
+		name: 'Monitor Dell 24" IPS',
 		description: 'Monitor Dell 24 polegadas IPS Full HD para escritório',
 		category: 'Eletrônicos',
 		price: 1199.0,
@@ -294,7 +294,7 @@ export const productsMock: Product[] = [
 	{
 		id: 30,
 		name: 'Suporte de monitor articulado ELG',
-		description: 'Suporte articulado ELG para monitor 17\" a 27\" com ajuste de altura',
+		description: 'Suporte articulado ELG para monitor 17" a 27" com ajuste de altura',
 		category: 'Acessórios',
 		price: 249.0,
 		stock: 16,
@@ -353,7 +353,7 @@ export const productsMock: Product[] = [
 	},
 	{
 		id: 36,
-		name: 'TV 43\" 4K Samsung',
+		name: 'TV 43" 4K Samsung',
 		description: 'TV Samsung 43 polegadas 4K para salas de reunião e exibição',
 		category: 'Vídeo',
 		price: 2199.9,

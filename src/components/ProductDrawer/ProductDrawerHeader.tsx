@@ -8,7 +8,7 @@ const CLOSE_LABEL = 'Fechar detalhes do produto'
 
 export const ProductDrawerHeader = ({ onClose }: ProductDrawerHeaderProps) => (
 	<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: tokens.drawer.headerMarginBottom }}>
-		<Typography variant="h6" fontWeight={600}>{TITLE}</Typography>
+		<Typography variant="h6" fontWeight={600} data-cy="product-drawer-title">{TITLE}</Typography>
 		<IconButton onClick={onClose} aria-label={CLOSE_LABEL} size="small">
 			<Close />
 		</IconButton>

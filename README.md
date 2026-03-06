@@ -2,8 +2,6 @@
 
 Aplicação de listagem de produtos com busca, paginação e drawer de detalhes. Desenvolvida com **React**, **TypeScript**, **React Query**, **Material UI** e **Vite**. Dados mockados e estado controlado via parâmetros da URL.
 
----
-
 ## Tecnologias
 
 - **React**
@@ -12,8 +10,6 @@ Aplicação de listagem de produtos com busca, paginação e drawer de detalhes.
 - **React Router DOM**
 - **React Query**
 - **Material UI**
-
----
 
 ## Instalação e execução
 
@@ -38,38 +34,36 @@ npm run build
 npm run preview
 ```
 
----
-
 ## Funcionalidades
 
 ### 1. Tabela paginada de produtos
 
 - Colunas: **ID**, **Nome**, **Categoria**, **Preço**, **Estoque**, **Status**.
 - Linhas:
-  - Clicáveis apenas quando o status é **Ativo**.
-  - Linha com estado **Inativo** exibida com menor destaque visual.
-  - Hover com feedback visual apenas para itens ativos.
+   - Clicáveis apenas quando o status é **Ativo**.
+   - Linha com estado **Inativo** exibida com menor destaque visual.
+   - Hover com feedback visual apenas para itens ativos.
 - Estados de UI:
-  - **Loading** com skeleton na tabela.
-  - **Erro** com mensagem dedicada.
-  - **Empty state** amigável, usando o termo de busca truncado quando aplicável.
+   - **Loading** com skeleton na tabela.
+   - **Erro** com mensagem dedicada.
+   - **Empty state** amigável, usando o termo de busca truncado quando aplicável.
 
 ### 2. Campo de busca com debounce
 
 - Busca por **nome** e **categoria** simultaneamente.
 - Debounce de **500ms** implementado via hook `useDebounce`.
 - Termo de busca é:
-  - Mantido na URL (`?search=...`).
-  - Normalizado na requisição sendo case-insensitive com remoção de espaços extras, preservando o valor digitado no input.
+   - Mantido na URL (`?search=...`).
+   - Normalizado na requisição sendo case-insensitive com remoção de espaços extras, preservando o valor digitado no input.
 - Ao alterar a busca:
-  - A página é resetada para **1**.
-  - A busca é preservada em recarregamentos e navegação (URL-driven).
+   - A página é resetada para **1**.
+   - A busca é preservada em recarregamentos e navegação (URL-driven).
 
 ### 3. Paginação
 
 - Itens por página: **10, 20, 50**.
 - Controle via URL:
-  - `?page=1&size=10`.
+   - `?page=1&size=10`.
 - Mantém parâmetros ao recarregar a página.
 - Exibe range e total: ex.: `1-10 de 50`.
 - Navegação entre páginas mantém os dados anteriores enquanto carrega os novos, graças ao `placeholderData` do React Query.
@@ -79,31 +73,81 @@ npm run preview
 - Ao clicar em uma linha ativa, abre um drawer lateral à direita.
 - Controlado via URL: `?productId=<id>`.
 - Exibe:
-  - **ID do Produto**
-  - **Nome completo**
-  - **Descrição**
-  - **Categoria**
-  - **Preço** formatado (`Intl.NumberFormat`)
-  - **Quantidade em estoque**
-  - **Status**
-  - **Data de criação** formatada (`Intl.DateTimeFormat` – `DD/MM/YYYY HH:mm`)
+   - **ID do Produto**
+   - **Nome completo**
+   - **Descrição**
+   - **Categoria**
+   - **Preço** formatado (`Intl.NumberFormat`)
+   - **Quantidade em estoque**
+   - **Status**
+   - **Data de criação** formatada (`Intl.DateTimeFormat` – `DD/MM/YYYY HH:mm`)
 - Produto **Inativo** não abre o drawer (nem pela URL): o parâmetro é removido da URL.
 - UX:
-  - Botão de fechar (`X`) com `aria-label`.
-  - Fecha ao clicar fora (backdrop).
-  - Remove `productId` da URL ao fechar.
-  - Em mobile, ocupa 90% da largura.
+   - Botão de fechar (`X`) com `aria-label`.
+   - Fecha ao clicar fora (backdrop).
+   - Remove `productId` da URL ao fechar.
+   - Em mobile, ocupa 90% da largura.
 
 ### 5. Dados mockados
 
 - Arquivo `mocks/productsMock.ts` com **50+ produtos**:
-  - Variação de categoria, preço, estoque, status e datas.
-- Função `fetchProducts` em `mocks/products.ts`:
-  - Simula latência de 500ms.
-  - Aplica filtro por nome/categoria com normalização de busca.
-  - Realiza paginação em memória e retorna um `PaginatedResponse<Product>`.
+   - Variação de categoria, preço, estoque, status e datas.
 
----
+- Função `fetchProducts` em `mocks/products.ts`:
+   - Simula latência de 500ms.
+   - Aplica filtro por nome/categoria com normalização de busca.
+   - Realiza paginação em memória e retorna um `PaginatedResponse<Product>`.
+
+## Testes
+
+### Cypress e Testes E2E
+
+O projeto utiliza **Cypress** para testes end-to-end (e2e), garantindo a qualidade e funcionalidade da aplicação em um ambiente real de navegador.
+
+#### Configuração
+
+- Base URL: `http://localhost:5173`
+- Arquivos de teste: `cypress/e2e/**/*.cy.ts`
+- Arquivo de suporte: `cypress/support/e2e.ts`
+
+#### Scripts disponíveis
+
+```bash
+# Abrir interface do Cypress
+npm run test:e2e
+
+# Executar testes em modo headless
+npm run test:e2e:run
+```
+
+#### Cenários de teste cobertos
+
+1. **Carregamento da listagem com paginação**
+   - Verifica se a tabela carrega produtos corretamente
+   - Valida presença de linhas na tabela
+
+2. **Filtragem de produtos pela busca**
+   - Testa entrada de texto no campo de busca
+   - Verifica atualização da URL com parâmetro `search`
+   - Confirma que os resultados filtrados aparecem na tabela
+
+3. **Abertura do drawer para produtos ativos**
+   - Clica em uma linha de produto com status "Ativo"
+   - Valida abertura do drawer lateral com detalhes do produto
+
+4. **Impedimento de abertura do drawer para produtos inativos**
+   - Tenta clicar em uma linha de produto com status "Inativo"
+   - Confirma que o drawer não é aberto
+
+#### Seletores de teste
+
+Os testes utilizam seletores `data-cy` para identificar elementos na interface:
+
+- `product-search-input`: Campo de busca
+- `products-table`: Tabela de produtos
+- `product-row`: Linha da tabela
+- `product-drawer-title`: Título do drawer
+- `product-status-chip`: Chip de status do produto
 
 ## Arquitetura
 
@@ -191,31 +235,27 @@ src/
 - **utils/formatters.ts**: `formatPrice`, `formatDate`, `normalizeSearchTerm`, `truncateSearchTerm`.
 - **theme**: `palette`, `theme` (MUI) e `tokens` (espaçamentos, larguras, etc.) para layout e componentes.
 
----
-
 ## UI / UX
 
 - **Identidade visual**
-  - Tema escuro: fundo azul profundo, destaques em amarelo e turquesa.
-  - Tipografia principal: **Poppins** (via Google Fonts).
-  - Layout com `AppLayout` contendo header fixo e área principal com cards.
+   - Tema escuro: fundo azul profundo, destaques em amarelo e turquesa.
+   - Tipografia principal: **Poppins** (via Google Fonts).
+   - Layout com `AppLayout` contendo header fixo e área principal com cards.
 
 - **Tabela**
-  - Exibe colunas completas em desktop.
-  - Em telas pequenas, a tabela permite scroll horizontal controlado via `TableContainer`.
-  - Textos longos tratados com `ellipsis` + `title` (tooltip nativo) para manter o layout limpo.
+   - Exibe colunas completas em desktop.
+   - Em telas pequenas, a tabela permite scroll horizontal controlado via `TableContainer`.
+   - Textos longos tratados com `ellipsis` + `title` (tooltip nativo) para manter o layout limpo.
 
 - **Feedbacks de estado**
-  - Loading e fetching com `CircularProgress`.
-  - Skeleton rows na tabela enquanto carrega produtos.
-  - Mensagens claras para erro e “Nenhum produto encontrado”.
+   - Loading e fetching com `CircularProgress`.
+   - Skeleton rows na tabela enquanto carrega produtos.
+   - Mensagens claras para erro e “Nenhum produto encontrado”.
 
 - **Acessibilidade**
-  - `aria-label` no botão de fechar do drawer.
-  - Cabeçalho de tabela semântico (`<TableHead>` / `<TableRow>` / `<TableCell>`).
-  - Foco visível customizado via tema (`MuiButtonBase`).
-
----
+   - `aria-label` no botão de fechar do drawer.
+   - Cabeçalho de tabela semântico (`<TableHead>` / `<TableRow>` / `<TableCell>`).
+   - Foco visível customizado via tema (`MuiButtonBase`).
 
 ## Requisitos atendidos
 
@@ -227,14 +267,10 @@ src/
 - [x] React Query, Material UI, React Router, TypeScript
 - [x] Parâmetros persistidos na URL e produto inativo não acessível no drawer
 
----
-
 ## Possíveis evoluções
 
 - Componentes reutilizáveis para:
-  - `PageHero` se houver mais dashboards.
-  - `SideDrawer` genérico controlado por query param.
+   - `PageHero` se houver mais dashboards.
+   - `SideDrawer` genérico controlado por query param.
 - Tratamento de erro com retry e feedback na UI.
-
-
-
+- Maior cobertura nos casos de testes.

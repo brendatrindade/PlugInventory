@@ -32,7 +32,7 @@ export const ProductTable = () => {
 
 	return (
 		<TableContainer component={Paper} sx={{ width: '100%', overflowX: tokens.table.containerOverflowX }}>
-			<Table aria-label={TABLE_LABELS.ariaLabel} size="small" sx={{ width: '100%', tableLayout: 'fixed', minWidth: tokens.table.minWidth }}>
+			<Table aria-label={TABLE_LABELS.ariaLabel} data-cy="products-table" size="small" sx={{ width: '100%', tableLayout: 'fixed', minWidth: tokens.table.minWidth }}>
 				<ProductTableHeader />
 				<TableBody>
 					{data.items.map((product) => (

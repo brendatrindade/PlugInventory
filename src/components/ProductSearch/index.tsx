@@ -19,6 +19,7 @@ export const ProductSearch = () => {
 		<>
 			<TextField
 				label={SEARCH_LABELS.label}
+				data-cy="product-search-input"
 				helperText={SEARCH_LABELS.helperText}
 				variant="outlined"
 				fullWidth
